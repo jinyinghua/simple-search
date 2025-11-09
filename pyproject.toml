@@ -1,0 +1,24 @@
+# my-smithery-tavily-server/pyproject.toml
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
+
+[project]
+name = "my_tavily_server"
+version = "0.1.0"
+description = "A simplified Tavily MCP server for Smithery"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "tavily-python>=0.2.0",    # Tavily API 客户端
+    "mcp>=1.15.0",             # FastMCP 服务器框架
+    "smithery>=0.4.2",         # Smithery 装饰器
+]
+
+[project.scripts]
+dev = "smithery.cli.dev:main"
+playground = "smithery.cli.playground:main"
+
+# Smithery 服务器配置：指向创建 FastMCP 服务器实例的函数
+[tool.smithery]
+server = "my_tavily_server.server:create_server"

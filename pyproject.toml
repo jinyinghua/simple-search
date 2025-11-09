@@ -10,15 +10,16 @@ description = "A simplified Tavily MCP server for Smithery"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "tavily-python>=0.2.0",    # Tavily API 客户端
-    "mcp>=1.15.0",             # FastMCP 服务器框架
-    "smithery>=0.4.2",         # Smithery 装饰器
+    "tavily-python>=0.2.0",
+    "mcp>=1.15.0",
+    "smithery>=0.4.2",
+    "requests>=2.31.0",        # 新增：用于发送 HTTP 请求
+    "beautifulsoup4>=4.12.3",  # 新增：用于解析 HTML
 ]
 
 [project.scripts]
 dev = "smithery.cli.dev:main"
 playground = "smithery.cli.playground:main"
 
-# Smithery 服务器配置：指向创建 FastMCP 服务器实例的函数
 [tool.smithery]
 server = "my_tavily_server.server:create_server"

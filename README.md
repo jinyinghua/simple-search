@@ -14,75 +14,10 @@
 - **Python**: 3.8+
 - 需要安装的包（示例）: `requests`, `beautifulsoup4`, `tavily`, `smithery`, `mcp`。
 
-**安装（示例）**
-1. 建议在虚拟环境中操作：
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
-
-2. 安装依赖（根据你的项目依赖管理器选择安装方式）。示例使用 `pip`：
-
-```bash
-pip install requests beautifulsoup4 tavily smithery mcp
-# 或者如果项目有 pyproject.toml/poetry，可以用 poetry 安装依赖
-```
-
-**环境变量**
-- `TAVILY_API_KEY`: 必须设置该环境变量，`simple_search` 工具会从环境变量读取 API Key。
-
-示例：
-
-```bash
-export TAVILY_API_KEY="your_tavily_api_key_here"
-```
-
-**快速验证（本地快速检查）**
-你可以简单导入并创建服务器实例来做一次快速检查：
-
-```bash
-export TAVILY_API_KEY="your_tavily_api_key_here"
-python -c "from my_tavily_server.server import create_server; s=create_server(); print('server name:', s.name)"
-```
-
-该命令会导入 `create_server` 并创建一个 `FastMCP` 实例（若缺少依赖将抛出 ImportError）。
-
-**在 Smithery 中使用（示例）**
-将此模块作为 MCP 服务器加载到你的 `smithery` 配置中（示例片段，视你的 smithery 配置格式调整）：
-
-```yaml
-# smithery.yaml（示例）
-# 确保 smithery 能发现并加载 `my_tavily_server.server.create_server`
-servers:
-	- module: my_tavily_server.server
-		create: create_server
-```
-
-然后使用 `smithery` 命令启动/加载你的服务（取决于你使用的 smithery CLI）：
-
-```bash
-# 示例命令（具体以您本地 smithery 使用方式为准）
-smithery run
-```
-
-**工具说明与示例**
-- `simple_search(query: str) -> str`:
-	- 输入: 搜索关键词字符串。
-	- 输出: 格式化的搜索结果摘要（Markdown 风格），或错误信息。
-	- 注意: 会从 `TAVILY_API_KEY` 读取 API Key。
-
-- `fetch(url: str) -> str`:
-	- 输入: 以 `http://` 或 `https://` 开头的 URL。
-	- 输出: 页面正文的纯文本（长度受限），或错误信息。
-
-示例（伪代码）:
-
-```py
-# 由 Smithery 或客户端在运行时调用：
-result = await server.tools['simple_search']('最新 的 AI 研究进展')
-page_text = await server.tools['fetch']('https://example.com/article')
-```
+**使用方法**
+- 1.为本项目点上 Star
+- 2.访问该项目在[Smithery](https://smithery.ai/server/@jinyinghua/simple-search)上部署的 MCP Server
+- 3.参考页面的 connect 部分链接到 AI 客户端
 
 **开发与贡献**
 - 欢迎通过 PR 提交改进：例如增加更好的正文抽取、缓存、或更细粒度的错误处理。
